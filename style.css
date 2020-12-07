@@ -1,10 +1,98 @@
-html, body {
-  margin: 0;
-  padding: 0;
+body{
+  background-color: black;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
 }
-canvas {
-  display: block;
+main{
+  display:flex;
+  justify-content: space-around;
+  margin: 1em;
 }
-#letter {
-  width:300px;
+
+h1{
+  font-size: 2.5em;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+#canvas{
+  display:flex;
+  align-items: center;
+}
+
+#customize{
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+#options{
+  display:flex;
+  flex-direction: column;
+}
+
+.entry{
+  margin: 1em;
+  font-size: 0.8em;
+}
+
+textarea {
+  font-family: 'Roboto Mono', monospace;
+  background-color: black;
+  
+  height: 4em;
+  color: white;
+  outline: none;
+  border:none;
+  resize: none;
+  font-size: 1.1em;
+  
+  text-align: center;
+  padding: 4% 0% 4% 0%;
+  outline-style: solid;
+  outline-color: rgba(255, 255, 255, 0.979);
+  outline-width: 0.1em;
+}
+textarea::placeholder{
+  color:white;
+  opacity:1;
+  font-size: 1.1em;
+}
+textarea:focus{
+  outline-style: solid;
+  outline-color: white;
+}
+
+input {
+  background-color: black;
+  border:none;
+}
+input:focus{
+  outline-style: solid;
+  outline-color: white;
+}
+
+button{
+  font-family: 'Roboto Mono', monospace;
+  background-color: black;
+  color:white;
+  border:none;
+  font-size: 1em;
+  margin: 1em;
+}
+button:hover{
+  border: 2px solid white;
+}
+
+#logo{
+  width: 5%;
+  float: right;
+  /* position: absolute;
+  right: 0; */
+}
+footer{
+  z-index: inherit 2;
+  position: fixed;
+   right: 0;
+   bottom: 0;
 }

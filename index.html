@@ -2,14 +2,45 @@
     <script src="p5.js"></script>
     <script src="p5.sound.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <meta charset="utf-8">
 
   </head>
   <body>
-    <label>Look at patterns</label>
-    <textarea id="letter" placeholder="Enter a lowercase letter or . to clear canvas"></textarea>
-    <script src="sketch.js"></script>
+    <main>
+      <section id = "title">
+        <h1>GENERATIVE ART</h1>
+      </section>
+      <section id = "canvas">
+      </section>
+      <section id="customize">
+        <div id="options">
+          <div class="entry">
+            <textarea id="letter" placeholder="Enter a letter to draw a shape." cols="30" rows="5"></textarea>
+          </div>
+          <div class="entry">
+            <label>Background Color:</label>
+            <input id="picker2" type="color">
+          </div>
+          <div class="entry">
+            <label>Color:</label>
+            <input id="picker" type="color">
+          </div>
+          
+          <button id="clear" onclick="clearCanvas()">CLEAR</button>
+          <button id="save" onclick="saveImage()">SAVE</button>
+      </div>
+      </section>
+
+    </main>
+    <footer>
+      <a href="http://julielizardo.com/" target="_blank"><img id ="logo" src="julielizardoblack.png" alt="logo"></a>
+    </footer>
+
     
-  
+    
+
+    <script src="sketch.js"></script>
 
 </body></html>

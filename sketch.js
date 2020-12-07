@@ -1,15 +1,26 @@
+let cnv;
+let xoff = 0;
+let yoff = 0;
+let line_color = [0,0,0];
+let bg = [0,100,0];
 
-let xoff =0;
-let yoff =0;
-let letter=  document.getElementById("letter");
+let bg_picker = document.getElementById("picker2");
+bg_picker.addEventListener("input", bgChange);
+
+let picker = document.getElementById("picker");
+picker.addEventListener("input", colorChange);
+
+let letter =  document.getElementById("letter");
 letter.addEventListener("input", myInputEvent);
 
 function setup() {
-  createCanvas(600, 600);
+  cnv = createCanvas(600, 600);
+  cnv.parent("canvas");
   background(0);
 
   strokeWeight(4);
   noFill();
+  colorMode(HSB, 360,100,100,1);
 }
 
 function draw() {
@@ -187,10 +198,10 @@ function pattern11() { // k -> horizontal dashes
 function pattern12(){ // l  -> perlin noise lines
   push();
   // stroke(255,255,255);
-  stroke(255,255,255,50);
+  stroke(int(line_color[0]),int(line_color[1]),int(random(40,70)));
   // let xoff=0;
   beginShape();
-  for (let i =0; i<100; i++ ){
+  for (let i =0; i<30; i++ ){
     xoff = xoff + 0.01;
     let n = noise(xoff) * width + random(-width/2, width/2);
     vertex(n,random(0,height));
@@ -200,6 +211,7 @@ function pattern12(){ // l  -> perlin noise lines
   endShape();
   pop();
 }
+
 function pattern13(len, x,y){ // m -> smaller triangles in a row
   if (len>2){
     const size = len;
@@ -376,8 +388,9 @@ function pattern26(){ // z -> // zig-zags
 }
 
 function myInputEvent(){
-  let color = (255,random(50,255));
-  stroke(color);
+
+  let colors = color(int(line_color[0]),int(line_color[1]), int(random(50,90)));
+  stroke(colors);
 
   // make sure it is lowercase
   let val = letter.value;
@@ -426,10 +439,10 @@ function myInputEvent(){
     pattern13(size, int(random(size/2,width-size/2)),int(random(0,height-size*2)));
   }
   else if (i === "n"){
-    pattern14(color);
+    pattern14(colors);
   }
   else if (i === "o"){
-    pattern15(color);
+    pattern15(colors);
   }
   else if (i === "p"){
     pattern16(int(random(30,360)));
@@ -447,7 +460,7 @@ function myInputEvent(){
     pattern20();
   }
   else if (i === "u"){
-    pattern21(color);
+    pattern21(colors);
   }
   else if (i === "v"){
     pattern22(int(random(30,360)), int(random(0,width/2)),int(random(0,height/2)));//
@@ -466,13 +479,72 @@ function myInputEvent(){
   else if (i === "z"){
     pattern26();
   }
-  else if (i  ==  "."){
-    background(0);
-    letter.value ="";
-    
+}
+
+function clearCanvas(){
+  background(color(int(bg[0]),int(bg[1]),int(bg[2])));
+  letter.value ="";
+}
+
+function saveImage(){
+  console.log(letter.value);
+  saveCanvas(cnv, letter.value, 'png');
+}
+
+function colorChange(){
+  line_color = hexToHSL(picker.value);
+}
+
+function bgChange(){
+  bg = hexToHSL(bg_picker.value);
+  background(color(int(bg[0]),int(bg[1]),int(bg[2])));
+
+}
+
+// from https://css-tricks.com/converting-color-spaces-in-javascript/#hex-to-hsl
+function hexToHSL(H) {
+  // Convert hex to RGB first
+  let r = 0, g = 0, b = 0;
+  if (H.length == 4) {
+    r = "0x" + H[1] + H[1];
+    g = "0x" + H[2] + H[2];
+    b = "0x" + H[3] + H[3];
+  } else if (H.length == 7) {
+    r = "0x" + H[1] + H[2];
+    g = "0x" + H[3] + H[4];
+    b = "0x" + H[5] + H[6];
   }
-  
-  
+  // Then to HSL
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  let cmin = Math.min(r,g,b),
+      cmax = Math.max(r,g,b),
+      delta = cmax - cmin,
+      h = 0,
+      s = 0,
+      l = 0;
+
+  if (delta == 0)
+    h = 0;
+  else if (cmax == r)
+    h = ((g - b) / delta) % 6;
+  else if (cmax == g)
+    h = (b - r) / delta + 2;
+  else
+    h = (r - g) / delta + 4;
+
+  h = Math.round(h * 60);
+
+  if (h < 0)
+    h += 360;
+
+  l = (cmax + cmin) / 2;
+  s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+  s = +(s * 100).toFixed(1);
+  l = +(l * 100).toFixed(1);
+
+  return [h, s , l ];
 }
 
 
