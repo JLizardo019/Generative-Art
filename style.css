@@ -72,6 +72,7 @@ input:focus{
   outline-color: white;
 }
 
+
 button{
   font-family: 'Roboto Mono', monospace;
   background-color: black;
@@ -82,6 +83,10 @@ button{
 }
 button:hover{
   border: 2px solid white;
+}
+button:focus{
+  border:none;
+  outline: none;
 }
 
 #logo{
