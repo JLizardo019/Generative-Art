@@ -35,7 +35,9 @@ h1{
   margin: 1em;
   font-size: 0.8em;
 }
-
+/* #two{
+  margin-bottom:1em;
+} */
 textarea {
   font-family: 'Roboto Mono', monospace;
   background-color: black;
@@ -46,16 +48,16 @@ textarea {
   border:none;
   resize: none;
   font-size: 1.1em;
-  
-  text-align: center;
-  padding: 4% 0% 4% 0%;
+/*   text-indent: 1em; */
+/*   text-align: center; */
+  padding: 4% 4% 4% 4%;
   outline-style: solid;
   outline-color: rgba(255, 255, 255, 0.979);
   outline-width: 0.1em;
 }
 textarea::placeholder{
   color:white;
-  opacity:1;
+  opacity:0.5;
   font-size: 1.1em;
 }
 textarea:focus{
@@ -100,4 +102,22 @@ footer{
   position: fixed;
    right: 0;
    bottom: 0;
+}
+
+@media screen and (max-width: 900px) {
+  main{
+    flex-direction: column !important;
+    align-items: center;
+  }
+  #defaultCanvas0{
+    width: 40% !important;
+    height: 40% !important;
+    margin: auto;
+  }
+  #customize {
+    margin-top: 1em;
+  }
+  h1{
+    writing-mode: horizontal-tb;
+  }
 }
